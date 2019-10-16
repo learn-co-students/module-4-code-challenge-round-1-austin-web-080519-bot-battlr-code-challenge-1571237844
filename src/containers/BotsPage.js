@@ -16,6 +16,7 @@ class BotsPage extends React.Component {
     this.fetchBots();
   }
 
+  // Fetches bots from api and lists them
   fetchBots = () => {
     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
     .then(resp => resp.json())
@@ -26,6 +27,7 @@ class BotsPage extends React.Component {
     })
   }
 
+  // Event handler that adds bot to army on enlist button click
   onEnlist = (enlistedBot) => {
     if (!this.state.botArmy.includes(enlistedBot)) {
       this.setState({
@@ -34,6 +36,7 @@ class BotsPage extends React.Component {
     }
   }
 
+  // Event handler that removes bot from army when clicked, otherwise will render BotSpecs
   onClick = (selectedBot) => {
     if (this.state.botArmy.includes(selectedBot)) {
       const botIndex = this.state.botArmy.indexOf(selectedBot);
@@ -50,6 +53,7 @@ class BotsPage extends React.Component {
     }
   }
 
+  // Event handler that goes back to list of bots on back button click
   onBack = () => {
     this.setState({
       specsClickedStatus: false

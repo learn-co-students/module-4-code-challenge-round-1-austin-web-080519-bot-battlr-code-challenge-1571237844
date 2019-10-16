@@ -7,3 +7,9 @@ body {
 .text-wrap {
 	word-wrap: break-word;
 }
+
+#filter-bar {
+  background-color: aqua;
+  margin-top: -10px;
+  margin-bottom: 5px;
+}

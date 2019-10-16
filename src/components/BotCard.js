@@ -1,6 +1,8 @@
 import React from "react";
+import YourBotArmy from "../containers/YourBotArmy";
 
 const BotCard = props => {
+  //deconstructor, individual referred to as bot
   const { bot } = props;
 
   let botType;
@@ -19,12 +21,18 @@ const BotCard = props => {
       botType = <div />;
   }
 
+  const handleClick = e => {
+    console.log("check if bot name gets passed ", e.target.value);
+  };
+
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
+        onClick={e => {
+          handleClick(e);
+        }}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
@@ -56,7 +64,6 @@ const BotCard = props => {
       </div>
     </div>
   );
-
 };
 
 export default BotCard;

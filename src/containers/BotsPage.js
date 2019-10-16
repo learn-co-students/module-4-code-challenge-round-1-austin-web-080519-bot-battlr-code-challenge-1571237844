@@ -31,21 +31,23 @@ class BotsPage extends React.Component {
       this.setState({
         botArmy: [...this.state.botArmy, enlistedBot]
       })
-    } else if (this.state.botArmy.includes(enlistedBot)) {
-      const botIndex = this.state.botArmy.indexOf(enlistedBot);
+    }
+  }
+
+  onClick = (selectedBot) => {
+    if (this.state.botArmy.includes(selectedBot)) {
+      const botIndex = this.state.botArmy.indexOf(selectedBot);
       const botArmyArray = this.state.botArmy;
       botArmyArray.splice(botIndex, 1);
       this.setState({
         botArmy: botArmyArray
       })
+    } else {
+      this.setState({
+        specsClickedStatus: true,
+        selectedBot: selectedBot
+      })
     }
-  }
-
-  onClick = (selectedBot) => {
-    this.setState({
-      specsClickedStatus: true,
-      selectedBot: selectedBot
-    })
   }
 
   onBack = () => {

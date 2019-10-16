@@ -1,5 +1,4 @@
 import React from "react";
-
 const BotCard = props => {
   const { bot } = props;
 
@@ -56,7 +55,6 @@ const BotCard = props => {
       </div>
     </div>
   );
-
 };
 
 export default BotCard;

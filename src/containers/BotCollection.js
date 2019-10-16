@@ -1,6 +1,5 @@
 import React from "react";
 import BotCard from "../components/BotCard";
-import BotSpecs from '../components/BotSpecs';
 
 class BotCollection extends React.Component {
   constructor(props){
@@ -13,20 +12,10 @@ class BotCollection extends React.Component {
   
 
   handleClick = (bot) => {
-	  this.setState({showSpecs: true, bot: bot})
-  }
-
-  viewAll = () => {
-	  this.setState({showSpecs: false, bot: {}})
-  }
-
-  addBot = (bot) => {
-	  this.props.addBot(bot);
-	  this.setState({showSpecs: false, bot: {}})
+	  this.props.viewSpecs(bot);
   }
 
   render(){
-	if(this.state.showSpecs === false){
   	  return (
   	    <div className="ui four column grid">
     	  	<div className="row">
@@ -35,10 +24,6 @@ class BotCollection extends React.Component {
     		</div>
   	    </div>
 	  );
-	}
-	else {
-		return (<BotSpecs bot={this.state.bot} viewAll={this.viewAll} addBot={this.addBot}/>)
-	}
   }
 
 };

@@ -14,8 +14,11 @@ class YourBotArmy extends React.Component {
       <div className="ui segment inverted olive bot-army">
         <div className="ui five column grid">
           <div className="row bot-army-row">
+          Your Bot Army
+          <button className = "ui button fluid" onClick={this.props.clearAllBots}>Clear All Bots</button>
             {this.props.bots.map(bot => <BotCard handleClick={this.handleClick} key={bot.id} bot={bot}/>)}
-            Your Bot Army
+            
+            
           </div>
         </div>
       </div>

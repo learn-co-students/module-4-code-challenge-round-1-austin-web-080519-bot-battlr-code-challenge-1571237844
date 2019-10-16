@@ -2,6 +2,7 @@ import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from "./YourBotArmy";
 import BotSpecs from '../components/BotSpecs'
+import Search from '../components/Search'
 
 class BotsPage extends React.Component {
 
@@ -9,9 +10,11 @@ class BotsPage extends React.Component {
     bots: [],
     botArmy: [],
     specsClickedStatus: false,
-    selectedBot: {}
+    selectedBot: {},
+    searchInput: ""
   }
 
+  // Fetches bots when component mounts
   componentDidMount() {
     this.fetchBots();
   }
@@ -21,10 +24,19 @@ class BotsPage extends React.Component {
     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
     .then(resp => resp.json())
     .then(botsResponse => {
+      const filteredBots = botsResponse.filter( bot => bot.name.toLowerCase().includes(this.state.searchInput.toLowerCase()))
       this.setState({
-        bots: botsResponse
+        bots: filteredBots
       })
     })
+  }
+
+  // Callback function that will update search input, which then filters the bots collection
+  onSearch = (input) => {
+    this.setState({
+      searchInput: input
+    })
+    this.fetchBots();
   }
 
   // Event handler that adds bot to army on enlist button click
@@ -61,10 +73,10 @@ class BotsPage extends React.Component {
   }
 
   render() {
-    console.log(this.state.selectedBot)
     return (
       <div>
         <YourBotArmy botArmy={this.state.botArmy} onClick={this.onClick}/>
+        <Search onSearch={this.onSearch}/>
         {this.state.specsClickedStatus ? 
         <BotSpecs onEnlist={this.onEnlist} onBack={this.onBack} bot={this.state.selectedBot}/> :
         <BotCollection bots={this.state.bots} onClick={this.onClick}/> }

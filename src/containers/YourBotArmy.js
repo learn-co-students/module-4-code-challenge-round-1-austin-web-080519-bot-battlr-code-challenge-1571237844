@@ -8,7 +8,6 @@ class YourBotArmy extends React.Component {
   }
 
   render(){
-    console.log(this.props.botArmy)
     return (
       <div className="ui segment inverted olive bot-army">
         <div className="ui five column grid">

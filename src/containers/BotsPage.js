@@ -1,12 +1,15 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
 
   state = {
     bots: [],
-    botArmy: []
+    botArmy: [],
+    specsClickedStatus: false,
+    selectedBot: {}
   }
 
   componentDidMount() {
@@ -23,7 +26,7 @@ class BotsPage extends React.Component {
     })
   }
 
-  onClick = (enlistedBot) => {
+  onEnlist = (enlistedBot) => {
     if (!this.state.botArmy.includes(enlistedBot)) {
       this.setState({
         botArmy: [...this.state.botArmy, enlistedBot]
@@ -38,12 +41,27 @@ class BotsPage extends React.Component {
     }
   }
 
+  onClick = (selectedBot) => {
+    this.setState({
+      specsClickedStatus: true,
+      selectedBot: selectedBot
+    })
+  }
+
+  onBack = () => {
+    this.setState({
+      specsClickedStatus: false
+    })
+  }
+
   render() {
-    // console.log(this.state.botArmy)
+    console.log(this.state.selectedBot)
     return (
       <div>
         <YourBotArmy botArmy={this.state.botArmy} onClick={this.onClick}/>
-        <BotCollection bots={this.state.bots} onClick={this.onClick}/>
+        {this.state.specsClickedStatus ? 
+        <BotSpecs onEnlist={this.onEnlist} onBack={this.onBack} bot={this.state.selectedBot}/> :
+        <BotCollection bots={this.state.bots} onClick={this.onClick}/> }
       </div>
     );
   }
